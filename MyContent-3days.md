@@ -1,7 +1,3 @@
-# Three days user analytics of My Content Module
-
-Based on the three sets of analytics data provided for the **"My Contents"** module, here is a comprehensive insight report modeled after your sample.
-
 # 📊 My Contents: User Engagement & Navigation Report
 
 **Data Window:** Dec 25 – Dec 27, 2025
