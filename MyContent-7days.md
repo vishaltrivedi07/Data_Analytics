@@ -15,6 +15,10 @@
 
 ***
 
+<img width="2558" height="1998" alt="861f7a4b-c499-4000-a30c-a7519329082b" src="https://github.com/user-attachments/assets/f7cc04ee-9a9b-4cb5-a577-41f45c386c42" />
+
+***
+
 ## 🚨 B. Critical Problems & Drop-offs
 
 ### 1️⃣ **Abandonment Issues**
@@ -52,6 +56,10 @@
 
 ***
 
+<img width="3126" height="1792" alt="ce7808a4-9ad0-4339-bbd1-ac1808434bf6" src="https://github.com/user-attachments/assets/12d9412d-95d3-4fa1-af32-491538720bf9" />
+
+***
+
 ## ✅ C. Prioritized Action Plan
 
 ### 🔥 **CRITICAL (Deploy First)**
@@ -77,6 +85,10 @@
 | **7** | ⏳ **Loading states for tabs**<br>Skeleton loader + 500ms debounce + pressed states | ↓ Tab spam from 87 → <20 sessions | Sessions with 5+ tab clicks/10s |
 | **8** | 🏷️ **Context chips for filters**<br>"Std 9 -  Math -  Quiz" + "Reset" button | ↓ Profile clicks from My Contents<br>↓ Standard filter churn | `edit_profile_click` from module<br>`standard_filter_changed` |
 | **9** | ⭐ **Rebrand Recent as "Workspace"**<br>Visual emphasis + "See Older Content" for All | Strengthen 75% Recent preference | Recent vs All session ratio<br>Time-to-first-content |
+
+***
+
+<img width="2578" height="2247" alt="0d53dc0b-8809-4ce7-a639-7fe4fbabcd30" src="https://github.com/user-attachments/assets/a847d45a-864b-47cf-8487-ee2aeb7b3242" />
 
 ***
 
