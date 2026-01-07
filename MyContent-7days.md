@@ -1,65 +1,124 @@
-### A. High-level summary  
-- Recent tab is the dominant entry point: 62% of module entries start from Recent vs 38% from All, and 45% of users find content within 2 seconds via Recent, indicating a fast, goal-driven flow.  
-- Overall content interaction is solid (68.4% of sessions click a content card) but still leaves 31.6% of sessions where users enter My Contents and never interact with a file.  
-- The All tab shows clear friction: average 4.2 clicks to reach content, 72% immediate standard changes, and high “peeking” (subject_folder_clicked → back) at 1.8 peeks per session, signaling discovery problems.  
-- AI content trust is weak: delete rate (34.2%) is far higher than share rate (12.4%) and much higher than manual content delete (4.1%), meaning teachers are aggressively pruning AI outputs.  
-- Multiple anomalies (logout/login loops, repeated more_options_menu_click, and tab spamming) indicate technical or UX issues that create frustration separate from core content value.
+# 📊 My Contents Module: Analytics Report
+**Data Window:** Dec 25–31, 2025 (7 days) | **Sessions:** 4,406 | **Core Users:** Teachers
 
-### B. Problems and drop-off points  
-- Users entering My Contents but never opening content → [Data evidence] Content interaction rate is 68.4%, so 31.6% of module entries end without a content_card_click → [Possible reason] Users do not immediately see relevant or expected content (especially on All), leading to early exits.  
-- High friction and exploration cost in All tab → [Data evidence] Avg 4.2 clicks to reach content in All, 72% of users change standard_filter immediately, and peeking behavior averages 1.8 folder opens followed by back_button_click per session → [Possible reason] Top-level All view does not communicate which folders/standards contain useful or new content, forcing users to probe and back out repeatedly.  
-- Difficulty understanding folder contents → [Data evidence] Described “high peeking” pattern (subject_folder_clicked followed immediately by back) and behavior note: “Users are struggling to identify folder contents from the top-level view” → [Possible reason] Subject folders lack content counters, last-updated info, or recent item hints, so clicks are exploratory, not confident.  
-- AI content perceived as noisy or low-value → [Data evidence] AI delete rate 34.2% vs share rate 12.4%, while manual content delete rate is only 4.1%, and specific users (406556, 31640) show heavy delete_ai_content_confirmed activity → [Possible reason] AI outputs are frequently off-target or clutter teachers’ libraries, so they clean up aggressively to maintain a tidy workspace.  
-- Underperforming AI share/usage vs manual content → [Data evidence] AI share rate (12.4%) is less than half of manual content share rate (28.6%) → [Possible reason] Teachers trust and rely on manually curated content for sharing, while AI content is treated more like drafts that rarely reach share-worthy quality.  
-- Logout/login loop causing severe frustration for at least one user → [Data evidence] User 374233 logged out and confirmed logout 15+ times within a single hour on Dec 26 → [Possible reason] Session persistence or authentication handling bug causing the user to repeatedly attempt to reset their state or escape a broken session.  
-- Confusing or inefficient “More options” bottom sheet → [Data evidence] Users often click more_options_menu_click 2–3 times before successfully reaching ai_content_share_click → [Possible reason] The options sheet may be closing unintentionally, or the share action is visually low-priority or mispositioned, making it hard to tap quickly.  
-- Perceived latency or non-responsive tabs → [Data evidence] Users 324221 and 406366 clicked the tab selector 5+ times in 10 seconds → [Possible reason] Slow data loading or lack of visible loading/disabled states leads users to repeatedly tap, thinking the app is stuck.  
-- Confusion about why expected content is missing → [Data evidence] Users often move from My Contents directly to edit_profile_click, seemingly to verify their Standard/Subject assignments → [Possible reason] When teachers do not see expected items, they suspect incorrect profile settings, indicating that content visibility and filters are not clearly communicated.  
-- Uneven subject adoption and potential blind spots in other subjects → [Data evidence] Math and Science folders receive 60% of all folder clicks → [Possible reason] Either content is concentrated in these subjects or other subjects are harder to discover, resulting in under-exploration outside Math/Science.
+***
 
-### C. Actionable recommendations  
-- Add content counters and “latest item” labels under each Subject/Chapter folder in All (e.g., “5 items -  Last: ‘Algebra – Equations’”) → [Expected impact] Reduce peeking and unnecessary back navigation by giving teachers more confidence before they click → [Metric to track] Decrease in back_button_click rate after subject_folder_clicked and reduction in average peeks per session.  
-- Introduce an AI “Drafts/Review” area separate from the main My Contents library, requiring explicit teacher approval to move AI items into the permanent library → [Expected impact] Lower AI deletion rate in the main library, higher perceived quality of visible AI content, and clearer mental model (“only what I approved lives here”) → [Metric to track] Reduction in delete_ai_content_confirmed_click in main library and increase in approved AI items used/shared.  
-- Improve AI item triage controls: add bulk-select (long press + multi-select), clearer “Approve/Keep” vs “Discard” actions, and more prominent share button inside the options sheet → [Expected impact] Reduce fatigue for heavy AI users (like User 31640), increase AI share rate, and shorten time from open to share → [Metric to track] Average number of deletes per session for high-volume users, AI share rate, and steps from more_options_menu_click to ai_content_share_click.  
-- Simplify and stabilize the “More options” bottom sheet (persistent until explicit dismissal, clear primary CTA for Share, larger tap targets) → [Expected impact] Fewer repeated more_options_menu_click attempts and smoother AI sharing → [Metric to track] Average number of more_options_menu_clicks before first ai_content_share_click per session.  
-- Add a global Search bar at the top of My Contents (across Recent and All) that can query by chapter name, subject, and content type → [Expected impact] Reduce deep navigation chains (Nav → All → Std → Subject → Chapter), especially for teachers who know exactly what they are looking for → [Metric to track] Reduction in average clicks-to-content in All and increased usage of search vs folder peeking.  
-- Implement visible loading states and input throttling on tab switches (skeleton loader, disabled re-taps for 500–1000 ms, clear pressed state) → [Expected impact] Decrease tab spamming and perceived lag, improving trust in responsiveness → [Metric to track] Drop in number of sessions with 5+ tab clicks in 10 seconds and overall tab click frequency per session.  
-- Detect and fix the logout/login loop for affected users (analyze server logs around Dec 26 for User 374233) and add safeguards to prevent repeated forced logouts → [Expected impact] Prevent severe frustration for impacted users and avoid hidden churn caused by session instability → [Metric to track] Number of sessions with >3 logout_confirmed events per hour and crash/exception rates around authentication.  
-- Clarify active Standard/Subject context and filter state at the top of My Contents (chips or badges like “Std 9 -  Math -  Quiz”) and offer a one-tap “Reset filters” option → [Expected impact] Reduce confusion that drives users to edit_profile just to validate their assignments and make it clearer why certain content is or is not visible → [Metric to track] Decrease in edit_profile_clicks originating from My Contents and reduced standard_filter_changed churn per session.  
-- Highlight and refine Recent tab as the default “workspace” (strong visual emphasis, maybe labeling it as “My Recent Work”) while keeping See All as a clearly secondary action for older items → [Expected impact] Maintain or increase the already strong Recent-based fast-access behavior and reduce unnecessary switches to All → [Metric to track] Share of module entries via Recent vs All and time-to-first-content for Recent sessions.
+## 🎯 A. Executive Summary
 
-### D. Additional observations (optional)  
-- Subject focus on Math and Science (60% of folder clicks) aligns with your teacher-centric design of the My Contents module in Edutor, where these subjects were previously described as core early-use cases.[1]
+| Priority | Finding | Impact |
+|----------|---------|--------|
+| 🟢 **STRENGTH** | **62-75%** users prefer Recent tab → **Fast access** (6s median) | High engagement with quick-access flow |
+| 🔴 **CRITICAL** | **31.6%** enter but never click content | ≈1,400 lost sessions/week |
+| 🟠 **FRICTION** | All tab requires **4.2 clicks** + **1.8 peeks/session** | High exploration cost |
+| 🔴 **AI TRUST** | **34.2%** delete vs **12.4%** share (2.8× ratio) | Teachers purging AI outputs |
+| ⚠️ **TECH BUGS** | Login loops + tab spam + menu failures | User frustration + potential churn |
 
-## Comparison between Old 3 days data and Current 7 days data:
+***
 
-## Improvements from 3-day to 7-day period
+## 🚨 B. Critical Problems & Drop-offs
 
-- **AI content sentiment became more balanced**  
-  The 3-day window showed a 2.8× higher AI delete rate vs share rate (34.2% delete vs 12.4% share), while the 7-day period shows a near 1:1 ratio (454 deletes vs 450 uses). This suggests teachers are either finding better AI outputs later in the week or becoming more selective about which AI items to keep rather than mass-purging.
+### 1️⃣ **Abandonment Issues**
 
-- **Recent tab dominance strengthened significantly**  
-  Recent tab usage increased from 62% of activity in the 3-day period to 74.6% in the 7-day period, indicating users learned to rely even more heavily on the fast-access Recent flow.
+| Problem | Data Evidence | Root Cause |
+|---------|--------------|------------|
+| 🔴 **Dead-end Sessions** | **31.6%** never click content<br>**249 sessions** = 5+ nav actions, 0 opens | Content not visible/relevant on entry |
+| 🔴 **All Tab Friction** | **4.2 avg clicks** to content<br>**72%** change standard immediately<br>**1.8 peeks** per session | No preview of folder contents |
 
-- **Friction and anomalies are now quantified with hard numbers**  
-  The 3-day report described issues qualitatively (e.g., "Users 324221 and 406366 clicked 5+ times"), while the 7-day analysis quantifies 249 lost sessions (5.7% of total) and 87 button spam sessions (2.0% of total), making it easier to prioritize fixes.
+### 2️⃣ **Navigation & Discovery Failures**
 
-- **Time-to-content baseline established**  
-  The 7-day data provides a concrete median time-to-content of 6 seconds, which aligns with the 3-day observation that 45% of users find content within 2 seconds via Recent but adds a full distribution (mean 124s, P90 115s) to identify the long-tail stuck users.
+| Problem | Data Evidence | Root Cause |
+|---------|--------------|------------|
+| 🟠 **Blind Folder Exploration** | High `subject_folder_click` → `back_button`<br>"Peeking" in **15.6%** of sessions | Missing: content counters, last-updated info |
+| 🟠 **Profile Confusion** | Frequent `My Contents` → `edit_profile_click` | Users verify Standard/Subject when content missing |
+| 🟠 **Subject Blindspots** | **60%** clicks = Math + Science only | Other subjects hard to discover |
 
-## Good points maintained across both periods
+### 3️⃣ **AI Content Crisis**
 
-- **Fast content access remains strong**  
-  Both datasets confirm that users who know what they want reach files very quickly: 45% under 2 seconds (3-day) and 6-second median (7-day) show the Recent flow is working efficiently for goal-directed sessions.
+| Metric | AI Content | Manual Content | Verdict |
+|--------|-----------|----------------|---------|
+| Delete Rate | **34.2%** 🔴 | 4.1% | **8.3× higher** |
+| Share Rate | **12.4%** 🔴 | 28.6% | **2.3× lower** |
+| User Behavior | Heavy purging (Users 406556, 31640) | Daily utility | **Low trust** |
 
-- **High standard switching frequency persists**  
-  The 3-day data showed 72% of All tab users immediately change the standard filter, and the 7-day data records 893 total standard switches, confirming that multi-standard navigation is a core use case (teachers managing multiple grades or shared devices).
+**Insight:** Teachers treat AI as "noisy drafts" requiring aggressive cleanup[1]
 
-- **Card-click preference over menus is consistent**  
-  Both periods show roughly 2× more direct content card clicks than menu/options interactions, indicating users prefer to "just open" rather than explore secondary actions.
+### 4️⃣ **Technical Blockers**
 
-- **Math and Science remain dominant subjects**  
-  The 3-day report noted 60% of folder clicks go to Math and Science, and this pattern holds in the broader 7-day dataset, confirming these are the most actively used subjects in My Contents.[1]
+| Issue | Data Evidence | Impact |
+|-------|--------------|--------|
+| ⚠️ **Login Loop Bug** | User 374233: **15+ logouts** in 1 hour | Session persistence failure |
+| ⚠️ **Menu Malfunction** | **2-3 clicks** on `more_options` before success | Sheet closes prematurely |
+| ⚠️ **Tab Latency** | **87 sessions** with 5+ clicks in 30s | No loading states → user impatience |
 
-- **Peeking and exploration behavior is stable**  
-  The 3-day report averaged 1.8 peeks per session, and the 7-day data shows 15.6% of sessions exhibit peeking (folder/filter actions without content opens within 60s), both indicating ongoing discovery friction in the All tab.
+***
+
+## ✅ C. Prioritized Action Plan
+
+### 🔥 **CRITICAL (Deploy First)**
+
+| # | Action | Expected Impact | Track Metric |
+|---|--------|----------------|--------------|
+| **1** | 🛠️ **Fix logout loop bug**<br>Analyze User 374233 logs (Dec 26) + add safeguards | Prevent churn from broken sessions | Sessions with >3 logouts/hour |
+| **2** | 🔍 **Add folder preview labels**<br>"5 items -  Last: Algebra - Equations" | ↓ Peeking by 50%<br>↓ Back clicks | Avg peeks/session<br>`back_button_click` rate |
+| **3** | 🗂️ **Create AI "Drafts" staging area**<br>Require explicit approval → main library | ↓ Delete rate from 34% → 15%<br>↑ Perceived AI quality | `delete_ai_content_confirmed`<br>Approved AI shares |
+
+### 🟠 **HIGH PRIORITY (Week 2)**
+
+| # | Action | Expected Impact | Track Metric |
+|---|--------|----------------|--------------|
+| **4** | 🔘 **Bulk AI management**<br>Long-press multi-select + batch delete/share | ↓ Session fatigue for power users<br>↑ AI share rate | Deletes per session<br>AI share rate |
+| **5** | 🔎 **Global search bar**<br>Query by chapter/subject/type across Recent + All | Bypass 4.2-click navigation depth | Clicks-to-content in All<br>Search adoption |
+| **6** | ⚙️ **Fix "More Options" sheet**<br>Persistent dismissal + clear Share CTA + larger tap targets | ↓ 2-3 clicks → 1 click for share | `more_options_menu_click` per share |
+
+### 🟢 **MEDIUM PRIORITY (Week 3-4)**
+
+| # | Action | Expected Impact | Track Metric |
+|---|--------|----------------|--------------|
+| **7** | ⏳ **Loading states for tabs**<br>Skeleton loader + 500ms debounce + pressed states | ↓ Tab spam from 87 → <20 sessions | Sessions with 5+ tab clicks/10s |
+| **8** | 🏷️ **Context chips for filters**<br>"Std 9 -  Math -  Quiz" + "Reset" button | ↓ Profile clicks from My Contents<br>↓ Standard filter churn | `edit_profile_click` from module<br>`standard_filter_changed` |
+| **9** | ⭐ **Rebrand Recent as "Workspace"**<br>Visual emphasis + "See Older Content" for All | Strengthen 75% Recent preference | Recent vs All session ratio<br>Time-to-first-content |
+
+***
+
+## 📈 D. Trend Comparison: 3-Day vs 7-Day
+
+### ✅ **IMPROVEMENTS**
+
+| Metric | 3-Day (Dec 25-27) | 7-Day (Dec 25-31) | Change |
+|--------|------------------|-------------------|--------|
+| 🤖 **AI Sentiment** | 2.8× more deletes than shares | **1:1 ratio** (454 deletes : 450 uses) | 🟢 **+64% improvement** |
+| 🏠 **Recent Tab Usage** | 62% | **74.6%** | 🟢 **+12.6pp** stronger preference |
+| 📊 **Data Precision** | Qualitative observations | **Quantified:** 249 lost + 87 spam sessions | 🟢 Actionable numbers |
+| ⏱️ **Speed Baseline** | "45% under 2s" | **6s median** (mean 124s, P90 115s) | 🟢 Full distribution |
+
+### 🔄 **STABLE PATTERNS (Good & Bad)**
+
+| Pattern | Status | Evidence |
+|---------|--------|----------|
+| ⚡ **Fast Recent Access** | ✅ Consistent | 45% <2s (3-day) ≈ 6s median (7-day) |
+| 🔀 **High Standard Switching** | ⚠️ Ongoing need | 72% immediate changes + 893 total switches |
+| 👆 **Card > Menu Preference** | ✅ Strong | ~2× card clicks vs menu (both periods) |
+| 📚 **Math/Science Dominance** | ⚠️ Imbalance | 60% of folder clicks (both periods) |
+| 🔍 **Peeking Behavior** | ⚠️ Friction persists | 1.8/session (3-day) ≈ 15.6% sessions (7-day) |
+
+***
+
+## 💡 E. Key Insights
+
+### 🎯 **What's Working**
+- ✅ Recent tab = **Primary workspace** (75% usage, 6s access)[1]
+- ✅ Direct action preference (2× card clicks vs menus)[1]
+- ✅ Goal-driven users reach content fast 
+
+### 🚧 **What's Broken**
+- ❌ All tab = **Discovery maze** (4.2 clicks, blind exploration)
+- ❌ AI content = **Trust deficit** (8× higher delete rate)
+- ❌ **1 in 3 sessions** end without content interaction
+- ❌ Multiple technical bugs (login, menu, latency)[1]
+
+### 📌 **Critical User Segments**
+- 🏆 **Power Users** (top 5): 31-36 content opens/week[1]
+- 🆘 **Lost Users** (249 sessions): 5+ nav actions, 0 opens[1]
+- 🤖 **AI Auditors** (Users 406556, 31640): Heavy AI deletion
+
+***
