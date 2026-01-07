@@ -30,3 +30,36 @@
 
 ### D. Additional observations (optional)  
 - Subject focus on Math and Science (60% of folder clicks) aligns with your teacher-centric design of the My Contents module in Edutor, where these subjects were previously described as core early-use cases.[1]
+
+## Comparison between Old 3 days data and Current 7 days data:
+
+## Improvements from 3-day to 7-day period
+
+- **AI content sentiment became more balanced**  
+  The 3-day window showed a 2.8× higher AI delete rate vs share rate (34.2% delete vs 12.4% share), while the 7-day period shows a near 1:1 ratio (454 deletes vs 450 uses). This suggests teachers are either finding better AI outputs later in the week or becoming more selective about which AI items to keep rather than mass-purging.
+
+- **Recent tab dominance strengthened significantly**  
+  Recent tab usage increased from 62% of activity in the 3-day period to 74.6% in the 7-day period, indicating users learned to rely even more heavily on the fast-access Recent flow.
+
+- **Friction and anomalies are now quantified with hard numbers**  
+  The 3-day report described issues qualitatively (e.g., "Users 324221 and 406366 clicked 5+ times"), while the 7-day analysis quantifies 249 lost sessions (5.7% of total) and 87 button spam sessions (2.0% of total), making it easier to prioritize fixes.
+
+- **Time-to-content baseline established**  
+  The 7-day data provides a concrete median time-to-content of 6 seconds, which aligns with the 3-day observation that 45% of users find content within 2 seconds via Recent but adds a full distribution (mean 124s, P90 115s) to identify the long-tail stuck users.
+
+## Good points maintained across both periods
+
+- **Fast content access remains strong**  
+  Both datasets confirm that users who know what they want reach files very quickly: 45% under 2 seconds (3-day) and 6-second median (7-day) show the Recent flow is working efficiently for goal-directed sessions.
+
+- **High standard switching frequency persists**  
+  The 3-day data showed 72% of All tab users immediately change the standard filter, and the 7-day data records 893 total standard switches, confirming that multi-standard navigation is a core use case (teachers managing multiple grades or shared devices).
+
+- **Card-click preference over menus is consistent**  
+  Both periods show roughly 2× more direct content card clicks than menu/options interactions, indicating users prefer to "just open" rather than explore secondary actions.
+
+- **Math and Science remain dominant subjects**  
+  The 3-day report noted 60% of folder clicks go to Math and Science, and this pattern holds in the broader 7-day dataset, confirming these are the most actively used subjects in My Contents.[1]
+
+- **Peeking and exploration behavior is stable**  
+  The 3-day report averaged 1.8 peeks per session, and the 7-day data shows 15.6% of sessions exhibit peeking (folder/filter actions without content opens within 60s), both indicating ongoing discovery friction in the All tab.
